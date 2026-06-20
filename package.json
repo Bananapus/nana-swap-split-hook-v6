@@ -1,0 +1,38 @@
+{
+  "name": "@bananapus/swap-split-hook-v6",
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bananapus/nana-swap-split-hook-v6.git"
+  },
+  "files": [
+    "deployments/",
+    "foundry.toml",
+    "references/",
+    "remappings.txt",
+    "script/",
+    "src/"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "test": "forge test",
+    "test:fork": "FOUNDRY_PROFILE=CI forge test --match-path 'test/fork/**'",
+    "coverage": "forge coverage --report lcov --report summary",
+    "deploy:mainnets": "source ./.env && npx sphinx propose ./script/Deploy.s.sol --networks mainnets",
+    "deploy:testnets": "source ./.env && npx sphinx propose ./script/Deploy.s.sol --networks testnets",
+    "artifacts": "source ./.env && npx sphinx artifacts --org-id 'ea165b21-7cdc-4d7b-be59-ecdd4c26bee4' --project-name 'nana-swap-split-hook-v6'"
+  },
+  "dependencies": {
+    "@bananapus/core-v6": "^1.0.2",
+    "@bananapus/permission-ids-v6": "^1.0.0",
+    "@bananapus/router-terminal-v6": "^1.1.0",
+    "@openzeppelin/contracts": "5.6.1",
+    "@sphinx-labs/contracts": "0.23.1"
+  },
+  "devDependencies": {
+    "@sphinx-labs/plugins": "0.33.3"
+  }
+}

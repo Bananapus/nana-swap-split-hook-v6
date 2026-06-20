@@ -1,0 +1,7 @@
+.github/
+.gitignore
+.env
+cache/
+node_modules/
+out/
+test/
