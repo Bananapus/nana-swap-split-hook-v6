@@ -160,7 +160,7 @@ contract JBSwapSplitHookTest is Test {
             _context({tokenIn: address(inputToken), tokenOut: address(usdc), amount: 1e18});
 
         vm.expectRevert(
-            abi.encodeWithSelector(IJBSwapSplitHook.JBSwapSplitHook_InvalidTerminal.selector, PROJECT_ID, address(this))
+            abi.encodeWithSelector(JBSwapSplitHook.JBSwapSplitHook_InvalidTerminal.selector, PROJECT_ID, address(this))
         );
         hook.processSplitWith(context);
     }
@@ -175,7 +175,7 @@ contract JBSwapSplitHookTest is Test {
 
         vm.expectRevert(
             abi.encodeWithSelector(
-                IJBSwapSplitHook.JBSwapSplitHook_InvalidGroup.selector,
+                JBSwapSplitHook.JBSwapSplitHook_InvalidGroup.selector,
                 address(inputToken),
                 1,
                 uint256(uint160(address(inputToken)))
@@ -192,7 +192,7 @@ contract JBSwapSplitHookTest is Test {
         vm.prank(address(terminal));
         vm.expectRevert(
             abi.encodeWithSelector(
-                IJBSwapSplitHook.JBSwapSplitHook_HookMismatch.selector, address(hook), address(0xBEEF)
+                JBSwapSplitHook.JBSwapSplitHook_HookMismatch.selector, address(hook), address(0xBEEF)
             )
         );
         hook.processSplitWith(context);
@@ -205,7 +205,7 @@ contract JBSwapSplitHookTest is Test {
         JBSplitHookContext memory context =
             _context({tokenIn: address(inputToken), tokenOut: address(0), amount: amount});
 
-        vm.expectRevert(IJBSwapSplitHook.JBSwapSplitHook_ZeroTokenOut.selector);
+        vm.expectRevert(JBSwapSplitHook.JBSwapSplitHook_ZeroTokenOut.selector);
         terminal.executeSplit(context);
     }
 
@@ -217,7 +217,7 @@ contract JBSwapSplitHookTest is Test {
         vm.deal({account: address(terminal), newBalance: amount});
         vm.prank(address(terminal));
         vm.expectRevert(
-            abi.encodeWithSelector(IJBSwapSplitHook.JBSwapSplitHook_NativeAmountMismatch.selector, amount, amount - 1)
+            abi.encodeWithSelector(JBSwapSplitHook.JBSwapSplitHook_NativeAmountMismatch.selector, amount, amount - 1)
         );
         hook.processSplitWith{value: amount - 1}(context);
     }
